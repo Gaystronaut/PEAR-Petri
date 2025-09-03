@@ -198,9 +198,9 @@ if __name__ == '__main__':
     args.hidden_layer =8
     args.load_memory_bool=False    
     args.n_step =5000#4500#10000 #6000
-    args.n_time_slot =300 #200 #300 #这个可以在device小的时候调大一点， 因为device4：while times= 2600,idx = 2305, time_slot = 140, neg=2179, pos=126
-    args.num_of_process =2#4 #注意显存占用！！在device大于8以上的时候，只能使用4个线程，小于4的时候用8个线程
-    args.process_batch_size =200#100 #代码写的是每收到一次batch_pakage就计算一次，怕太小 #感觉太小会经常阻塞？
+    args.n_time_slot =300 
+    args.num_of_process =2#4 #注意显存占用！
+    args.process_batch_size =200
     
     schedule_stats(interval=500)
     
@@ -213,7 +213,7 @@ if __name__ == '__main__':
 
     # 设置printf重定向
     setup_printf_redirection(args)        
-    # 现在所有print()调用都会自动添加时间戳并同时输出到终端和文件
+
     
     print(f"*******Task: {args.n_task}, Device: {args.n_device}, h_max: {args.n_h_max},use_random:{args.use_random},_time_slot_{args.n_time_slot}*********")
                
@@ -245,5 +245,6 @@ if __name__ == '__main__':
     sys.stdout.flush()    
     trainer = TrainerDQN(args)
     trainer.run_training()
+
 
 
